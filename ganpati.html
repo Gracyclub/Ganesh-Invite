@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Ganesh Chaturthi | Divine Blessings</title>
+  
+  <!-- Festive Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Playfair+Display:ital,wght@0,600;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-gold: #e5a93c;
+      --gold-dark: #b37d1d;
+      --bg-cream: #faf7f2;
+      --deep-maroon: #541116;
+      --card-bg: rgba(255, 255, 255, 0.94);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      color: #2b1f1d;
+      background-image: radial-gradient(#dfcaa3 0.8px, transparent 0.8px);
+      background-size: 26px 26px;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Falling Petals Layer */
+    .petals-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100;
+      overflow: hidden;
+    }
+
+    .petal {
+      position: absolute;
+      top: -30px;
+      font-size: 20px;
+      user-select: none;
+      animation: fallDown linear infinite;
+    }
+
+    @keyframes fallDown {
+      0% {
+        transform: translateY(0) rotate(0deg) translateX(0);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(105vh) rotate(360deg) translateX(50px);
+        opacity: 0.2;
+      }
+    }
+
+    .main-wrapper {
+      width: 100%;
+      max-width: 440px;
+      padding: 35px 20px 60px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Bappa Hero Frame */
+    .bappa-halo-container {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .aura-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 215px;
+      height: 215px;
+      border: 1.5px dashed var(--primary-gold);
+      border-radius: 50%;
+      animation: rotateAura 25s linear infinite;
+    }
+
+    @keyframes rotateAura {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .bappa-img-box {
+      width: 175px;
+      height: 175px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      box-shadow: 0 12px 35px rgba(229, 169, 60, 0.4);
+      position: relative;
+      z-index: 2;
+      background: #fff9f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      animation: floatBappa 3.5s ease-in-out infinite;
+    }
+
+    .bappa-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes floatBappa {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+
+    /* Headings */
+    .sender-badge {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .shri-mantra {
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: var(--gold-dark);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 26px;
+      color: var(--deep-maroon);
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .hero-sub {
+      font-size: 13px;
+      color: #6d5b57;
+      margin-bottom: 22px;
+    }
+
+    /* Smooth Scroll Fade-In Cards */
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(229, 169, 60, 0.35);
+      border-radius: 24px;
+      padding: 24px 20px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      margin-bottom: 22px;
+      opacity: 0;
+      transform: translateY(25px);
+      transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .glass-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card-heading {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 17px;
+      color: var(--deep-maroon);
+      margin-bottom: 12px;
+    }
+
+    .prosperity-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: #403230;
+      margin-bottom: 8px;
+    }
+
+    .signature-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--deep-maroon);
+      margin-top: 15px;
+      border-top: 1px dashed rgba(229, 169, 60, 0.4);
+      padding-top: 12px;
+    }
+
+    /* Blessing Highlights */
+    .blessing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .bless-item {
+      background: #fff;
+      border: 1px solid rgba(229, 169, 60, 0.25);
+      border-radius: 16px;
+      padding: 12px 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      transition: transform 0.2s;
+    }
+
+    .bless-item:hover {
+      transform: translateY(-3px);
+    }
+
+    .bless-icon {
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+
+    .bless-title {
+      font-weight: 600;
+      font-size: 12.5px;
+      color: var(--deep-maroon);
+    }
+
+    .bless-desc {
+      font-size: 11px;
+      color: #7a6b68;
+    }
+
+    /* Interactive Ritual Elements (Bell & Diya Grid) */
+    .rituals-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 15px 0 10px 0;
+    }
+
+    .ritual-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Animated Bell */
+    .bell-btn {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fcebc7 0%, #ffd074 100%);
+      border: 2px solid var(--primary-gold);
+      font-size: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(229, 169, 60, 0.35);
+      transition: transform 0.15s ease;
+    }
+
+    .bell-ringing {
+      animation: ringSwing 0.8s ease-in-out;
+    }
+
+    @keyframes ringSwing {
+      0%, 100% { transform: rotate(0deg); }
+      20% { transform: rotate(-25deg); }
+      40% { transform: rotate(25deg); }
+      60% { transform: rotate(-15deg); }
+      80% { transform: rotate(15deg); }
+    }
+
+    /* Interactive Diya */
+    .diya-btn {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fdebd0 0%, #f5cba7 100%);
+      border: 2px solid var(--primary-gold);
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(229, 169, 60, 0.3);
+      transition: all 0.3s;
+    }
+
+    .diya-icon {
+      font-size: 30px;
+      transition: all 0.3s;
+    }
+
+    .diya-lit {
+      box-shadow: 0 0 35px rgba(255, 121, 63, 0.8), 0 0 15px rgba(255, 211, 42, 0.9);
+      background: radial-gradient(circle, #fff3cd 10%, #ffc048 100%);
+      transform: scale(1.05);
+    }
+
+    .ritual-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #6a5754;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    #ritualStatus {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--deep-maroon);
+      min-height: 22px;
+      margin-top: 10px;
+    }
+
+    /* Buttons */
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #e5a93c 0%, #b37d1d 100%);
+      color: #fff;
+      font-weight: 600;
+      font-size: 13.5px;
+      padding: 14px 26px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(179, 125, 29, 0.35);
+      transition: transform 0.2s;
+      width: 100%;
+      max-width: 280px;
+      margin-top: 8px;
+    }
+
+    .btn-gold:active {
+      transform: scale(0.97);
+    }
+
+    .share-badge {
+      font-size: 12px;
+      color: #8c7672;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Falling Flower Petals Animation Container -->
+  <div class="petals-container" id="petals"></div>
+
+  <div class="main-wrapper">
+    
+    <!-- Hero Frame -->
+    <div class="bappa-halo-container">
+      <div class="aura-ring"></div>
+      <div class="bappa-img-box">
+        <img 
+          src="ganpati.jpg" 
+          alt="Lord Ganesha"
+          onerror="this.style.display='none'; document.getElementById('defaultSvg').style.display='block';"
+        />
+
+        <!-- Fallback SVG Art -->
+        <svg id="defaultSvg" style="display:none;" viewBox="0 0 100 100" width="120" height="120">
+          <circle cx="50" cy="50" r="46" fill="#fff9eb" stroke="#e5a93c" stroke-width="2"/>
+          <path d="M40 28 L50 12 L60 28 L55 33 L45 33 Z" fill="#e5a93c" stroke="#b37d1d" stroke-width="1.2"/>
+          <circle cx="50" cy="18" r="2.5" fill="#e74c3c"/>
+          <path d="M37 38 C22 32 20 54 36 60" fill="#fdebd0" stroke="#e5a93c" stroke-width="2"/>
+          <path d="M63 38 C78 32 80 54 64 60" fill="#fdebd0" stroke="#e5a93c" stroke-width="2"/>
+          <ellipse cx="50" cy="44" rx="14" ry="12" fill="#fdebd0"/>
+          <path d="M46 48 Q46 70 57 70 Q64 70 64 62" fill="none" stroke="#e5a93c" stroke-width="6.5" stroke-linecap="round"/>
+          <ellipse cx="44" cy="42" rx="1.6" ry="2.4" fill="#2c2523"/>
+          <ellipse cx="56" cy="42" rx="1.6" ry="2.4" fill="#2c2523"/>
+          <path d="M48 33 H52 V40 H48 Z" fill="#e74c3c"/>
+          <circle cx="65" cy="58" r="3.8" fill="#f39c12"/>
+        </svg>
+      </div>
+    </div>
+
+    <p class="shri-mantra">॥ श्री गणेशाय नमः ॥</p>
+    <p class="sender-badge" id="senderBadge">Warm Wishes From Gracy Goswami</p>
+    <h1 class="hero-title">Happy Ganesh Chaturthi</h1>
+    <p class="hero-sub">May divine grace bring light, success, and abundance to your home ✨</p>
+
+    <!-- Card 1: Prosperity Message -->
+    <div class="glass-card">
+      <h2 class="card-heading">A Gift of Prosperity</h2>
+      <p class="prosperity-text">
+        "May Lord Ganesha remove all obstacles from your journey, illuminate your intellect, and open doors to endless abundance."
+      </p>
+      <p class="prosperity-text" style="font-size: 13px; margin-top: 6px;">
+        Wishing you and your family joyful moments, radiant health, and flourishing achievements this festive season.
+      </p>
+
+      <!-- 4 Pillars -->
+      <div class="blessing-grid">
+        <div class="bless-item">
+          <div class="bless-icon">🌟</div>
+          <div class="bless-title">Success</div>
+          <div class="bless-desc">In every step</div>
+        </div>
+        <div class="bless-item">
+          <div class="bless-icon">🪔</div>
+          <div class="bless-title">Wisdom</div>
+          <div class="bless-desc">To lead your path</div>
+        </div>
+        <div class="bless-item">
+          <div class="bless-icon">🌸</div>
+          <div class="bless-title">Peace</div>
+          <div class="bless-desc">Within your home</div>
+        </div>
+        <div class="bless-item">
+          <div class="bless-icon">💰</div>
+          <div class="bless-title">Abundance</div>
+          <div class="bless-desc">Health & prosperity</div>
+        </div>
+      </div>
+
+      <div class="signature-text" id="signatureText">
+        With Prayers & Best Wishes,<br>
+        <strong>Gracy Goswami & Family 🌸</strong>
+      </div>
+    </div>
+
+    <!-- Card 2: Interactive Offering (Bell + Diya) -->
+    <div class="glass-card">
+      <h2 class="card-heading">Offer Your Prayers</h2>
+      <p style="font-size: 13px; color: #6a5754; margin-bottom: 12px;">Tap the bell to ring and tap the diya to illuminate:</p>
+      
+      <div class="rituals-container">
+        <!-- Sacred Bell -->
+        <div class="ritual-item">
+          <button class="bell-btn" id="templeBell" onclick="ringBell()">🔔</button>
+          <span class="ritual-label">Ring Bell</span>
+        </div>
+
+        <!-- Sacred Diya -->
+        <div class="ritual-item">
+          <button class="diya-btn" id="sacredDiya" onclick="lightDiya()">
+            <span class="diya-icon">🪔</span>
+          </button>
+          <span class="ritual-label">Light Diya</span>
+        </div>
+      </div>
+
+      <div id="ritualStatus"></div>
+    </div>
+
+    <!-- WhatsApp Share Button -->
+    <button class="btn-gold" onclick="shareBlessing()">
+      Send Blessings on WhatsApp 🌸
+    </button>
+    
+    <p class="share-badge">Ganpati Bappa Morya! 🙏</p>
+
+  </div>
+
+  <script>
+    // 1. Flower Petals Animation Generator
+    const petalContainer = document.getElementById('petals');
+    const petalEmojis = ['🌸', '🌺', '🌼', '✨'];
+
+    function createPetal() {
+      const petal = document.createElement('div');
+      petal.classList.add('petal');
+      petal.innerText = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
+      petal.style.left = Math.random() * 100 + 'vw';
+      petal.style.animationDuration = (Math.random() * 3 + 4) + 's';
+      petal.style.fontSize = (Math.random() * 12 + 14) + 'px';
+      petalContainer.appendChild(petal);
+
+      setTimeout(() => {
+        petal.remove();
+      }, 7000);
+    }
+    setInterval(createPetal, 450);
+
+    // 2. Scroll Reveal Effect for Glass Cards
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.glass-card').forEach(card => {
+      observer.observe(card);
+    });
+
+    // 3. Bell Ringing + Web Audio API Sound
+    function ringBell() {
+      const bell = document.getElementById('templeBell');
+      const status = document.getElementById('ritualStatus');
+      
+      bell.classList.remove('bell-ringing');
+      void bell.offsetWidth; // Trigger reflow
+      bell.classList.add('bell-ringing');
+      
+      status.innerText = "॥ ॐ गं गणपतये नमः ॥ Sacred Bell Resonated! 🔔✨";
+
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(840, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(320, audioCtx.currentTime + 1.2);
+        gain.gain.setValueAtTime(0.35, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1.2);
+      } catch(e) {}
+    }
+
+    // 4. Light the Diya Interaction
+    let isLit = false;
+    function lightDiya() {
+      const diya = document.getElementById('sacredDiya');
+      const status = document.getElementById('ritualStatus');
+      
+      if (!isLit) {
+        diya.classList.add('diya-lit');
+        status.innerText = "The Sacred Diya is Lit! May it remove all darkness 🪔✨";
+        isLit = true;
+      } else {
+        status.innerText = "Bappa's eternal flame is already illuminating your path! 🪔🙏";
+      }
+    }
+
+    // 5. Personalized URL Parameter Reader
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const customName = urlParams.get('name');
+
+      if (customName) {
+        document.getElementById('senderBadge').innerText = `Warm Wishes From ${customName}`;
+        document.getElementById('signatureText').innerHTML = `With Prayers & Best Wishes,<br><strong>${customName} & Family 🌸</strong>`;
+      }
+    });
+
+    // 6. Direct WhatsApp Sharing
+    function shareBlessing() {
+      const currentUrl = window.location.href;
+      const shareUrl = currentUrl.startsWith('file:') 
+        ? "https://your-page-link.com" 
+        : currentUrl;
+
+      const messageText = encodeURIComponent(
+        "🌸 Happy Ganesh Chaturthi! 🌸\nWarm festive greetings and heartfelt prayers from Gracy Goswami & Family.\nMay Lord Ganesha remove all obstacles and shower blessings on you!\n\nOpen your digital blessing: " + shareUrl
+      );
+
+      window.open(`https://api.whatsapp.com/send?text=${messageText}`, '_blank');
+    }
+  </script>
+</body>
+</html>
