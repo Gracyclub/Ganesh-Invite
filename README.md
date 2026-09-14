@@ -22,7 +22,7 @@ A festive, lightweight, and fully responsive digital blessing web app created to
 
 ### 🚀 Live Demo
 Visit the live interactive experience here:  
-👉 **https://Gracyclub.github.io/ganesh-invite/**
+👉 **https://gracyclub.github.io/-Ganesh-Chaturthi-Wish-Card/**
 
 ---
 
